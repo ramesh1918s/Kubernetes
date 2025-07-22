@@ -32,11 +32,12 @@ spec:
     spec:
       containers:
         - name: backend
-          image: joindevops/backend: 3.0.0
+          image: joindevops/backend:3.0.0
           envFrom:
             - configMapRef:
                 name: backend
           # Uncomment if needed later:
+
 # readinessProbe:
 #   tcpSocket:
 #     port: 3306
