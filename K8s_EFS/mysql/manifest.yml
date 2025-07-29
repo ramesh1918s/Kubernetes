@@ -7,32 +7,30 @@ spec:
   storageClassName: "expense-ebs"
   accessModes:
     - ReadWriteOnce
-
   resources:
     requests:
       storage: 4Gi
-
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
+  namespace: expense
 spec:
   selector:
     matchLabels:
-
-      component: mysql 
+      component: mysql
       project: expense
-      tier: db 
+      tier: db
   serviceName: "nginx"
-  replicas: 3 # by default is 1
-  minReadySeconds: 10 # by default is 0
+  replicas: 3
+  minReadySeconds: 10
   template:
     metadata:
       labels:
-      component: mysql 
-      project: expense
-      tier: db  # has to match .spec.selector.matchLabels
+        component: mysql
+        project: expense
+        tier: db
     spec:
       terminationGracePeriodSeconds: 10
       containers:
@@ -44,7 +42,7 @@ spec:
         volumeMounts:
         - name: mysql
           mountPath: /var/lib/mysql
-        volumes:
-        - name: persistent-storage
-          persistentVolumeClaim:
-            claimName: mysql
+      volumes:
+      - name: mysql
+        persistentVolumeClaim:
+          claimName: mysql
