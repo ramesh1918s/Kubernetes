@@ -1,0 +1,11 @@
+Step-1
+create a vulome in aws with in same region (cluster, and vulome are same region)
+- aws vulome
+- create a vulome (100gb)
+
+Step-2
+Install ebs drivers in terminal 
+- first the kubectl version
+-  kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.29"
+-  kubectl get pods -n kube-system | grep ebs # check the ebs drivers are install or not
+-
